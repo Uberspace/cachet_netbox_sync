@@ -6,7 +6,7 @@ lint:
 
 .PHONY: install
 setup:
-	pip install -e .
+	pip install --user -e .
 
 .PHONY: devsetup
 devsetup:
