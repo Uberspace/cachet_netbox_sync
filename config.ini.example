@@ -17,10 +17,12 @@ token=%(ENV_CACHET_TOKEN)s
 
 [base]
 # "delete"
-#   to remove groups, that do not show up in netbox, from cachet.
+#   to remove groups, that do not show up in netbox, from cachet. This is best
+#   suited, if all groups in cachet are created by this tool.
 # "keep"
-#   to never delete any groups. This may result in ghost groups,
-#   which were present at the source in the past, but then vanished.
+#   to never delete any groups. This may result in ghost groups, which were
+#   present at the source in the past, but then vanished. Use this value, if
+#   you have groups which are manually managed in cachet.
 unknown_group_action=keep
 # how many components or groups may be deleted at once? If the sync tries to
 # delete more than the given value, no groups/components are moved at all. This
@@ -33,10 +35,34 @@ group_delete_limit=0
 component_delete_limit_fail=true
 group_delete_limit_fail=true
 
+# define a kind of object to be synced. the section must be prefixed by
+# "source.netbox." followed by an arbitrary, unique idenifier. All fields,
+# except for endpoint are optional.
 [source.netbox.u6]
+# the kind of data to get. to work out this value, follow the following steps:
+#   1. first visit /api on your nextbox instance
+#   2. navigate to the resource to import,
+#      e.g. /api/virtualization/virtual-machines/
+#   3. strip /api and trailing/leading slashes
+#      e.g.      virtualization/virtual-machines
+#   4. replace / with . and - with _
+#      e.g.      virtualization.virtual_machines
+#   5. that's it.
 endpoint=virtualization.virtual_machines
+# filters work like URL parameters in the API, e.g.
+#   .../?cluster__name=kvm-chain-rhtec
+# becomes
+#   filters.cluster__name=kvm-chain-rhtec
+# they are AND'ed
 filters.tenant=uberspace-6
 filters.status=1
+# group comoments in the cachet interface by any field returned by the API, e.g.
+#   platform.name              =>  CentOS 7
+#   site.name                  =>  FRA2
+#   custom_fields.cachet_name  =>  whatever you put in there
+#   memory                     =>  28672
 group_by_field=tenant.name
+# which field to use as the name, defaults to "name"
 #name_field=name
+# which field to use as the description, defaults to no description
 #description_field=
