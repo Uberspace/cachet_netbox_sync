@@ -25,7 +25,7 @@ def _get_source_data(netbox: ApiType, source: SourceConfig):
     for obj in objs:
         name = deepgetattr(obj, source.name_field)
         description = deepgetattr(obj, source.description_field)
-        group = deepgetattr(obj, source.group_by_field)
+        group = deepgetattr(obj, source.group_by_field) or source.group
 
         yield {
             'name': name,
