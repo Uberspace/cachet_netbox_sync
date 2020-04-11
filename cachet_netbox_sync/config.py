@@ -1,6 +1,5 @@
 import configparser
 import enum
-import os
 import typing
 from dataclasses import dataclass
 
@@ -123,8 +122,8 @@ def _parse_listsection(
     return sections
 
 
-def parse(config_path: str) -> Config:
-    env_vars = {f'ENV_{k}': v for k, v in os.environ.items() if '%' not in v}
+def parse(config_path: str, env: typing.Mapping[str, str]) -> Config:
+    env_vars = {f'ENV_{k}': v for k, v in env.items() if '%' not in v}
     parser = configparser.ConfigParser(defaults=env_vars)
     parser.read(config_path)
 

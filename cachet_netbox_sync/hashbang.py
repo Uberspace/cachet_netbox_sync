@@ -1,3 +1,4 @@
+import os
 import sys
 from argparse import ArgumentParser
 
@@ -11,7 +12,7 @@ def main():
     parser.add_argument('--config-file', '-c', required=True)
     args = parser.parse_args()
 
-    cfg = config.parse(args.config_file)
+    cfg = config.parse(args.config_file, os.environ)
     rc = run_config(cfg)
     sys.exit(rc)
 
