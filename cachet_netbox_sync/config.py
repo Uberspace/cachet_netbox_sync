@@ -26,7 +26,7 @@ class UnknownGroupAction(enum.Enum):
 class SourceConfig:
     endpoint: str
     filters: typing.Dict[str, str]
-    group_by_field: str
+    group_by_field: str = None
     name_field: str = 'name'
     description_field: str = ''
 
