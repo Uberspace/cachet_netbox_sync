@@ -1,18 +1,16 @@
 import typing
 
-import cachetclient
-import cachetclient.v1.enums as enums  # NOQA
-
-ApiClient = cachetclient.Client
+import cachetclient  # type: ignore
+import cachetclient.v1.enums as enums  # type: ignore  # NOQA
 
 
-def get_client(url: str, token: str) -> ApiClient:
+def get_client(url: str, token: str) -> cachetclient.Client:
     cachet = cachetclient.Client(endpoint=url, api_token=token)
     cachet.ping()
     return cachet
 
 
-def add_groups(client: ApiClient, cachet_groups, netbox_groups):
+def add_groups(client: cachetclient.Client, cachet_groups, netbox_groups):
     to_delete = cachet_groups.copy()
     name_to_id = {}
 
@@ -26,7 +24,7 @@ def add_groups(client: ApiClient, cachet_groups, netbox_groups):
     return name_to_id, to_delete
 
 
-def delete_groups(client: ApiClient, group_ids: typing.List[int]):
+def delete_groups(client: cachetclient.Client, group_ids: typing.List[int]):
     for gid in group_ids:
         client.component_groups.delete(gid)
 
@@ -50,7 +48,7 @@ def create_component(client, data):
     client.components.create(**data)
 
 
-def delete_components(client: ApiClient, component_ids: typing.List[int]):
+def delete_components(client: cachetclient.Client, component_ids: typing.List[int]):
     for cid in component_ids:
         client.components.delete(cid)
 

@@ -1,20 +1,18 @@
 import typing
 
-import pynetbox
+import pynetbox  # type: ignore
 
 from .config import SourceConfig
 from .util import deepgetattr
 
-ApiType = pynetbox.api
 
-
-def get_client(url, token) -> ApiType:
+def get_client(url, token) -> pynetbox.api:
     netbox = pynetbox.api(url, token=token, threading=True)
     netbox.version
     return netbox
 
 
-def _get_source_data(netbox: ApiType, source: SourceConfig):
+def _get_source_data(netbox: pynetbox.api, source: SourceConfig):
     source_endpoint = deepgetattr(netbox, source.endpoint)
 
     if source.filters:
@@ -34,7 +32,7 @@ def _get_source_data(netbox: ApiType, source: SourceConfig):
         }
 
 
-def get_data(netbox: ApiType, sources: typing.List[SourceConfig]):
+def get_data(netbox: pynetbox.api, sources: typing.List[SourceConfig]):
     components = [
         component
         for source in sources

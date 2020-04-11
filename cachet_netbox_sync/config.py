@@ -25,8 +25,8 @@ class UnknownGroupAction(enum.Enum):
 class SourceConfig:
     endpoint: str
     filters: typing.Dict[str, str]
-    group_by_field: str = None
-    group: str = None
+    group_by_field: typing.Optional[str] = None
+    group: typing.Optional[str] = None
     name_field: str = 'name'
     description_field: str = ''
 
@@ -47,9 +47,7 @@ class Config:
     sources: typing.List[SourceConfig]
 
 
-def _parse_smart_section(
-    section: configparser.SectionProxy
-) -> typing.Dict[str, typing.Union[str, typing.Dict[str, str]]]:
+def _parse_smart_section(section: configparser.SectionProxy):
     """
     Convert a ConfigParser section into a python dictionary. Values within the
     section are converted dictionary keys. The section name is ignored. To
@@ -72,7 +70,7 @@ def _parse_smart_section(
 
             => {'filter': {'tenant': 'u6', 'status': '1'}}
     """
-    data = {}
+    data: typing.Dict[str, typing.Union[str, typing.Dict[str, str]]] = {}
 
     for k, v in section.items():
         if k.startswith('env_'):
