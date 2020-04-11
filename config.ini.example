@@ -1,0 +1,42 @@
+# cachet_netbox_sync takes lists of hosts, VMs, sites, ... from netbox and
+# creates components in cachet accordingly.
+#
+# This file contains all information which is required to sync the data. You
+# might choose to not store all of it here, though. Any value can be fully or
+# partly loaded from the process environment using the python %(...)s syntax.
+# Asking for ENV_NETBOX_TOKEN yields the value of $NETBOX_TOKEN.
+
+[netbox]
+url=https://netbox.example.com
+token=%(ENV_NETBOX_TOKEN)s
+
+[cachet]
+base_url=https://status.example.com
+url=%(base_url)s/api/v1
+token=%(ENV_CACHET_TOKEN)s
+
+[base]
+# "delete"
+#   to remove groups, that do not show up in netbox, from cachet.
+# "keep"
+#   to never delete any groups. This may result in ghost groups,
+#   which were present at the source in the past, but then vanished.
+unknown_group_action=keep
+# how many components or groups may be deleted at once? If the sync tries to
+# delete more than the given value, no groups/components are moved at all. This
+# is a safeguard against wiping the entire cachet database due to faulty source
+# data.
+component_delete_limit=10
+group_delete_limit=0
+# exit with an exit code > 0, if the respective delete limit is hit. New data
+# will still added and existing records will still be updated.
+component_delete_limit_fail=true
+group_delete_limit_fail=true
+
+[source.netbox.u6]
+endpoint=virtualization.virtual_machines
+filters.tenant=uberspace-6
+filters.status=1
+group_by_field=tenant.name
+#name_field=name
+#description_field=
