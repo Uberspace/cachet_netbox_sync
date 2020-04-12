@@ -4,7 +4,7 @@ SRCDIR=cachet_netbox_sync
 lint:
 	pre-commit run -a
 
-.PHONY: install
+.PHONY: setup
 setup:
 	pip install --user -e .
 
