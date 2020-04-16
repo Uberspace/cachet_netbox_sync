@@ -67,6 +67,21 @@ the other way around.
 Please refer to the comments in [`config.example.ini`](config.example.ini) for
 details on how to configure syncing.
 
+### Automation
+
+Once there is a working configuration, a cronjob can be used to sync
+the data regularily. The script can also be executed by your CI/CD system
+or anything else you use internally.
+
+Add the follwing to the crontab of the user you ran `make install` as:
+
+```cron
+0 * * * * cachet_netbox_sync -c ~/.cachet_netbox_sync.config.ini
+```
+
+This assumes your `$PATH` includes `~/.local/bin`, which is where pip
+installs python "binaries".
+
 ## Dev Setup
 
 ```console
