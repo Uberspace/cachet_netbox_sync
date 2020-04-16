@@ -28,6 +28,7 @@ The easiest way to install this tool is to get the source and run
 
 ```console
 $ git clone https://github.com/uberspace/cachet_netbox_sync.git
+$ cd cachet_netbox_sync
 $ make install
 ```
 
