@@ -71,6 +71,7 @@ details on how to configure syncing.
 
 ```console
 $ git clone https://github.com/uberspace/cachet_netbox_sync.git
+$ cd cachet_netbox_sync
 $ virtualenv venv
 $ source venv/bin/activate
 $ make devsetup
