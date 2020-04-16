@@ -34,8 +34,8 @@ $ make install
 
 ## Operation
 
-1. get a cachet API token by visiting `/dashboard/user`
-2. get a netbox readonly API token by visiting `/admin/users/token/`
+1. get a cachet API token from `https://cachet.example.com/dashboard/user`
+2. get a netbox readonly API token from `https://netbox.example.com/admin/users/token/`
 3. copy `config.example.ini` and edit it according to the docs below
 4. if you decided to leave the API tokens out of the config file, make sure
    `CACHET_TOKEN` and `NETBOX_TOKEN` are defined in your environment.
