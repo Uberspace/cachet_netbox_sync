@@ -30,6 +30,14 @@ command into the python context of the currently logged in user.
 $ pip install git+https://github.com/uberspace/cachet_netbox_sync.git
 ```
 
+Alternatively, you can use the [`uberspace/cachet_netbox_sync`](https://hub.docker.com/r/uberspace/cachet_netbox_sync)
+docker image in a variety of ways:
+
+* make your own: `FROM uberspace/cachet_netbox_sync`, bake in a config and run it
+* run it as a command: `docker run -V config.ini:/config.ini uberspace/cachet_netbox_sync --config /config.ini`
+* use GitLab CIs [`image:`](https://docs.gitlab.com/ee/ci/yaml/#image): `image: { name: uberspace/cachet_netbox_sync, entrypoint: bash }` and run
+  `cachet_netbox_sync` in the `script` section.
+
 ## Operation
 
 1. get a cachet API token from `https://cachet.example.com/dashboard/user`
