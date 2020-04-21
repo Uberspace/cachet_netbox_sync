@@ -22,14 +22,12 @@ group called "Uberspace 6" and display their status on your cachet instance.
 
 ## Setup
 
-The easiest way to install this tool is to get the source and run
-`make install`. This will install the dependencies as well as the
-`cachet_netbox_sync` into the python context of the currently logged in user.
+The easiest way to install this tool is using `pip`, the python package
+manager. This will install the dependencies as well as the `cachet_netbox_sync`
+command into the python context of the currently logged in user.
 
 ```console
-$ git clone https://github.com/uberspace/cachet_netbox_sync.git
-$ cd cachet_netbox_sync
-$ make install
+$ pip install git+https://github.com/uberspace/cachet_netbox_sync.git
 ```
 
 ## Operation
