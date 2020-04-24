@@ -63,7 +63,7 @@ def sync_components(cfg, cachet_client, netbox_components, cachet_components, gr
     components_to_delete = cachet.upsert_components(
         cachet_client, netbox_components, cachet_components, groupname_to_id)
 
-    if len(cachet_components) <= cfg.component_delete_limit:
+    if len(components_to_delete) <= cfg.component_delete_limit:
         cachet.delete_components(cachet_client, components_to_delete)
     elif cfg.component_delete_limit_fail:
         component_delete_failed = True
