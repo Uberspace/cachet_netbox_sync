@@ -22,6 +22,11 @@ group called "Uberspace 6" and display their status on your cachet instance.
 
 ## Setup
 
+The tool can be installed conventionally using the python package manager or
+newage new age-y using docker.
+
+### Python pip
+
 The easiest way to install this tool is using `pip`, the python package
 manager. This will install the dependencies as well as the `cachet_netbox_sync`
 command into the python context of the currently logged in user.
@@ -30,13 +35,54 @@ command into the python context of the currently logged in user.
 $ pip install git+https://github.com/uberspace/cachet_netbox_sync.git
 ```
 
-Alternatively, you can use the [`uberspace/cachet_netbox_sync`](https://hub.docker.com/r/uberspace/cachet_netbox_sync)
-docker image in a variety of ways:
+### Docker
 
-* make your own: `FROM uberspace/cachet_netbox_sync`, bake in a config and run it
-* run it as a command: `docker run -V config.ini:/config.ini uberspace/cachet_netbox_sync --config /config.ini`
-* use GitLab CIs [`image:`](https://docs.gitlab.com/ee/ci/yaml/#image): `image: { name: uberspace/cachet_netbox_sync, entrypoint: bash }` and run
-  `cachet_netbox_sync` in the `script` section.
+Alternatively, you can use the [`uberspace/cachet_netbox_sync`](https://hub.docker.com/r/uberspace/cachet_netbox_sync)
+docker image to keep the python dependency management off your system.
+
+#### Command
+
+The docker image can be used like a shell command like so:
+
+```console
+$ docker pull uberspace/cachet_netbox_sync
+$ docker run -V config.ini:/config.ini uberspace/cachet_netbox_sync --config /config.ini
+```
+
+#### Custom image
+
+Instead of using our pre-built image, you can make your own. Save the following
+snippet as a `Dockerfile`, place a `config.ini` next to it and there you go:
+your very own `cachet_netbox_sync` with baked-in config. Just be carefull to not
+include any secrets in there, as they can be read by anyone in possession of the
+image.
+
+```dockerfile
+FROM uberspace/cachet_netbox_sync
+COPY config.ini /config.ini
+ENTRYPOINT ["cachet_netbox_sync", "-c", "/config.ini"]
+```
+
+#### Gitlab
+
+If you have a GitLab with GitLab-CI running, you can use it to refresh your
+cachet on-demand or in a cronjob-like fashion.
+
+1. create a new project
+2. commit a `config.ini`
+3. add your secrets as [variables](https://docs.gitlab.com/ee/ci/variables/#via-the-ui)
+4. commit the following `.gitlab-ci.yml`
+
+```yaml
+---
+sync_cachet:
+  image:
+    name: uberspace/cachet_netbox_sync
+    # https://gitlab.com/gitlab-org/gitlab-runner/issues/1170#note_271904909
+    entrypoint: [""]
+  script:
+    - cachet_netbox_sync --config cachet_netbox_sync.ini
+```
 
 ## Operation
 
