@@ -60,7 +60,6 @@ def upsert_components(client, netbox_components, cachet_components, groupname_to
         name = component['name']
         data = {
             'name': name,
-            'status': enums.COMPONENT_STATUS_OPERATIONAL,
             'description': component['description'],
             'tags': {'cachet-netbox-sync'},
             'group_id': groupname_to_id[component['group']],
@@ -71,6 +70,7 @@ def upsert_components(client, netbox_components, cachet_components, groupname_to
             update_component(component, data)
             del to_delete[name]
         else:
+            data['status'] = enums.COMPONENT_STATUS_OPERATIONAL
             create_component(client, data)
 
     return to_delete
