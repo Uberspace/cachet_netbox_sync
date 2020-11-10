@@ -15,7 +15,7 @@ setup(
     },
     install_requires=[
         'cachet-client==3.0.*',
-        'pynetbox==4.3.*',
+        'pynetbox==5.1.*',
     ],
     extras_require={
         'dev': [
