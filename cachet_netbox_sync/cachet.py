@@ -73,4 +73,4 @@ def upsert_components(client, netbox_components, cachet_components, groupname_to
             data['status'] = enums.COMPONENT_STATUS_OPERATIONAL
             create_component(client, data)
 
-    return [c['id'] for c in to_delete]
+    return [c['id'] for c in to_delete.values()]
