@@ -1,0 +1,42 @@
+---
+lint:
+  stage: test
+  only:
+    - branches
+  image: python:3.9
+  variables:
+    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+    PRE_COMMIT_HOME: "$CI_PROJECT_DIR/.cache/pre-commit"
+  cache:
+    key:
+      files:
+        - requirements.txt
+        - .pre-commit-config.yaml
+    paths:
+      - .cache
+  before_script:
+    - make setup
+  script:
+    - make lint
+
+build:
+  stage: deploy
+  only:
+    - tags
+  tags:
+    - cloud
+  services:
+    - docker:stable-dind
+  image: registry.uberspace.is/images/docker
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+    IMAGE_NAME: $CI_REGISTRY_IMAGE
+    IMAGE_TAG: $CI_COMMIT_TAG
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_JOB_TOKEN" "$CI_REGISTRY"
+    - make build
+    - make test
+    - docker push "$IMAGE_NAME:$IMAGE_TAG"
+    - docker push "$IMAGE_NAME:latest"
