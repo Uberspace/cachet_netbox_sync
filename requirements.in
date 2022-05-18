@@ -1,0 +1,6 @@
+-e .[dev]
+bumpver
+pip-tools
+pre-commit
+safety
+towncrier
