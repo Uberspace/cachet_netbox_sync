@@ -57,3 +57,8 @@ repos:
           - --in-place
           - --max-line-length
           - "100"
+  # Requirements
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+    rev: v1.2.3
+    hooks:
+      - id: python-safety-dependencies-check
