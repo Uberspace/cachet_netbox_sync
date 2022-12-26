@@ -1,43 +1,108 @@
-black==22.3.0             # via cachet-netbox-sync
-bumpver==2022.1116        # via -r requirements.in
-cachet-client==3.0.0      # via cachet-netbox-sync
-certifi==2021.10.8        # via requests
-cfgv==3.3.1               # via pre-commit
-charset-normalizer==2.0.12  # via requests
-click==8.1.3              # via black, bumpver, click-default-group, pip-tools, safety, towncrier
-click-default-group==1.2.2  # via towncrier
-colorama==0.4.4           # via bumpver
-distlib==0.3.4            # via virtualenv
-dparse==0.5.1             # via safety
-filelock==3.7.0           # via virtualenv
-identify==2.5.0           # via pre-commit
-idna==3.3                 # via requests
-incremental==21.3.0       # via towncrier
-jinja2==3.1.2             # via towncrier
-lexid==2021.1006          # via bumpver
-markupsafe==2.1.1         # via jinja2
-mypy-extensions==0.4.3    # via black
-nodeenv==1.6.0            # via pre-commit
-packaging==21.3           # via dparse, safety
-pathlib2==2.3.7.post1     # via bumpver
-pathspec==0.9.0           # via black
-pep517==0.12.0            # via pip-tools
-pip-tools==6.6.1          # via -r requirements.in
-platformdirs==2.5.2       # via black, virtualenv
-pre-commit==2.19.0        # via -r requirements.in, cachet-netbox-sync
-pynetbox==5.1.2           # via cachet-netbox-sync
-pyparsing==3.0.9          # via packaging
-pyyaml==6.0               # via dparse, pre-commit
-requests==2.27.1          # via cachet-client, pynetbox, safety
-safety==1.10.3            # via -r requirements.in
-six==1.16.0               # via pathlib2, pynetbox, virtualenv
-toml==0.10.2              # via bumpver, dparse, pre-commit
-tomli==2.0.1              # via black, pep517, towncrier
-towncrier==21.9.0         # via -r requirements.in
-typing-extensions==4.2.0  # via black
-urllib3==1.26.9           # via requests
-virtualenv==20.14.1       # via pre-commit
-wheel==0.37.1             # via pip-tools
+-e file:///home/dependabot/dependabot-updater/tmp/dependabot_20221226-7-n5i60d
+    # via -r requirements.in
+black==22.3.0
+    # via sanitized-package
+bumpver==2022.1116
+    # via -r requirements.in
+cachet-client==3.0.0
+    # via sanitized-package
+certifi==2021.10.8
+    # via requests
+cfgv==3.3.1
+    # via pre-commit
+charset-normalizer==2.0.12
+    # via requests
+click==8.1.3
+    # via
+    #   black
+    #   bumpver
+    #   click-default-group
+    #   pip-tools
+    #   safety
+    #   towncrier
+click-default-group==1.2.2
+    # via towncrier
+colorama==0.4.4
+    # via bumpver
+distlib==0.3.4
+    # via virtualenv
+dparse==0.5.1
+    # via safety
+filelock==3.7.0
+    # via virtualenv
+identify==2.5.0
+    # via pre-commit
+idna==3.3
+    # via requests
+incremental==21.3.0
+    # via towncrier
+jinja2==3.1.2
+    # via towncrier
+lexid==2021.1006
+    # via bumpver
+markupsafe==2.1.1
+    # via jinja2
+mypy-extensions==0.4.3
+    # via black
+nodeenv==1.6.0
+    # via pre-commit
+packaging==21.3
+    # via
+    #   dparse
+    #   safety
+pathlib2==2.3.7.post1
+    # via bumpver
+pathspec==0.9.0
+    # via black
+pep517==0.12.0
+    # via pip-tools
+pip-tools==6.6.1
+    # via -r requirements.in
+platformdirs==2.5.2
+    # via
+    #   black
+    #   virtualenv
+pre-commit==2.19.0
+    # via
+    #   -r requirements.in
+    #   sanitized-package
+pynetbox==5.1.2
+    # via sanitized-package
+pyparsing==3.0.9
+    # via packaging
+pyyaml==6.0
+    # via
+    #   dparse
+    #   pre-commit
+requests==2.27.1
+    # via
+    #   cachet-client
+    #   pynetbox
+    #   safety
+safety==1.10.3
+    # via -r requirements.in
+six==1.16.0
+    # via
+    #   pathlib2
+    #   pynetbox
+    #   virtualenv
+toml==0.10.2
+    # via
+    #   bumpver
+    #   dparse
+    #   pre-commit
+tomli==2.0.1
+    # via
+    #   pep517
+    #   towncrier
+towncrier==21.9.0
+    # via -r requirements.in
+urllib3==1.26.9
+    # via requests
+virtualenv==20.14.1
+    # via pre-commit
+wheel==0.38.1
+    # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
